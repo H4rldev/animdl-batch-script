@@ -1,0 +1,12 @@
+[1m [36m ___  _ _  _  __ _        __   _   [0m
+[1m [36m| . || \ || ||  \ \  ___ | . \| |  [0m
+[1m [36m|   ||   || ||     ||___|| | || |_ [0m
+[1m [36m|_|_||_\_||_||_|_|_|     |___/|___|[0m
+                                   
+Batch script by H4rl    
+Python script by KR
+                     
+https://github.com/justfoolingaround
+https://github.com/justfoolingaround/animdl
+
+
