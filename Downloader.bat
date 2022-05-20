@@ -11,10 +11,17 @@ if exist "%~dp0\install" (
    ) else (
       goto init
    )
-   goto init
 ) else (
-   goto init
+   if exist "%~dp0\install.bat" (
+      del /F /Q "%~dp0\install.bat"
+   ) else (
+      goto update
+   )
 )
 
 :init
-echo among
+echo Choose action:
+echo ==============================
+echo = [1.] [[32mInstall[0m]  =
+echo = [2.] [[32mStream[0m]   =
+echo = [3.] [[32m[0m]
