@@ -1,6 +1,36 @@
 @echo off
 
 :init
+if exist "%~dp0\logo.txt" (
+   if exist "%~dp0\credits.txt" (
+      if exist "%~dp0\license.txt" (
+        goto init1
+      )
+   ) else (
+      powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/credits.txt' -outfile .\credits.txt"
+      if exist "%~dp0\license.txt" (
+         goto init1
+      ) else (
+         powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/license.txt' -outfile .\license.txt"
+         goto init1
+      )
+   )
+) else (
+   powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/logo.txt' -outfile .\logo.txt"
+   if exist "%~dp0\credits.txt" (
+      if exist "%~dp0\license.txt" (
+        goto init1
+      ) else (
+        powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/license.txt' -outfile .\license.txt"
+        goto init1
+      )
+   ) else (
+      powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/credits.txt' -outfile .\credits.txt"
+      goto init1
+   )
+)
+
+:init1
 if exist "%~dp0\install\" (
    goto removeinstallfiles
 ) else (
@@ -45,36 +75,6 @@ if exist "%~dp0\install.bat" (
 )
 
 :init2
-if exist "%~dp0\logo.txt" (
-   if exist "%~dp0\credits.txt" (
-      if exist "%~dp0\license.txt" (
-        goto init3
-      )
-   ) else (
-      powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/credits.txt' -outfile .\credits.txt"
-      if exist "%~dp0\license.txt" (
-         goto init3
-      ) else (
-         powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/license.txt' -outfile .\license.txt"
-         goto init3
-      )
-   )
-) else (
-   powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/logo.txt' -outfile .\logo.txt"
-   if exist "%~dp0\credits.txt" (
-      if exist "%~dp0\license.txt" (
-        goto init3
-      ) else (
-        powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/license.txt' -outfile .\license.txt"
-        goto init3
-      )
-   ) else (
-      powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/credits.txt' -outfile .\credits.txt"
-      goto init3
-   )
-)
-
-:init3
 cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
