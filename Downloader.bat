@@ -4,40 +4,40 @@
 if exist "%~dp0\logo.txt" (
    if exist "%~dp0\credits.txt" (
       if exist "%~dp0\license.txt" (
-        goto init1
+        goto :init1
       )
    ) else (
       powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/credits.txt' -outfile .\credits.txt"
       if exist "%~dp0\license.txt" (
-         goto init1
+         goto :init1
       ) else (
          powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/license.txt' -outfile .\license.txt"
-         goto init1
+         goto :init1
       )
    )
 ) else (
    powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/logo.txt' -outfile .\logo.txt"
    if exist "%~dp0\credits.txt" (
       if exist "%~dp0\license.txt" (
-        goto init1
+        goto :init1
       ) else (
         powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/license.txt' -outfile .\license.txt"
-        goto init1
+        goto :init1
       )
    ) else (
       powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script/master/credits.txt' -outfile .\credits.txt"
-      goto init1
+      goto :init1
    )
 )
 
 :init1
 if exist "%~dp0\install\" (
-   goto removeinstallfiles
+   goto :removeinstallfiles
 ) else (
    if exist "%~dp0\install.bat" (
-      goto removeinstallfiles
+      goto :removeinstallfiles
    ) else (
-      goto init2
+      goto :init2
    )
 )
 
@@ -51,10 +51,10 @@ echo  [Y.] [32mYes[0m
 echo  [N.] [31mNo[0m
 choice /C YN /N /M Choose: 
 if %errorlevel% == 1 (
-   goto removeinstallfiles2
+   goto :removeinstallfiles2
 )
 if %errorlevel% == 2 (
-   goto init2
+   goto :init2
 )
 
 :removeinstallfiles2
@@ -63,14 +63,14 @@ if exist "%~dp0\install.bat" (
    if exist "%~dp0\install\" (
       RD /S /Q "%~dp0\install"
    ) else (
-      goto init2
+      goto :init2
    )
 ) else (
    if exist "%~dp0\install" (
       RD /S /Q "%~dp0\install"
-      goto init2
+      goto :init2
    ) else (
-      goto init2
+      goto :init2
    )
 )
 
@@ -79,14 +79,14 @@ cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 pause
-goto license
+goto :license
 
 :license
 cls
 if exist "%ALLUSERSPROFILE%\animdlbatch\yes\yes.txt" (
-   goto menu
+   goto :menu
 ) else (
-   goto license2
+   goto :license2
 )
 
 :license2
@@ -99,7 +99,7 @@ if %errorlevel% == 1 (
    echo yes > yes.txt
    mkdir %ALLUSERSPROFILE%\animdlbatch\yes
    move %~dp0\yes.txt %ALLUSERSPROFILE%\animdlbatch\yes
-   goto menu
+   goto :menu
 )
 if %errorlevel% == 2 (
    exit
@@ -127,22 +127,22 @@ echo # [Show other options.]                    #
 echo --------------------------------------------
 choice /C 123456 /N /M Choose: 
 if %errorlevel% == 1 (
-   goto download
+   goto :download
 )
 if %errorlevel% == 2 (
-   goto stream
+   goto :stream
 )
 if %errorlevel% == 3 (
-   goto schedule
+   goto :schedule
 )
 if %errorlevel% == 4 (
-   goto search
+   goto :search
 )
 if %errorlevel% == 5 (
-   goto test
+   goto :test
 )
 if %errorlevel% == 6 (
-   goto options
+   goto :options
 )
 
 :test
@@ -151,7 +151,7 @@ type %~dp0\logo.txt
 type %~dp0\credits.txt
 animdl test
 pause
-goto license
+goto :license
 
 :schedule
 cls
@@ -159,7 +159,7 @@ type %~dp0\logo.txt
 type %~dp0\credits.txt
 animdl schedule
 pause
-goto license
+goto :license
 
 :search
 cls
@@ -168,13 +168,13 @@ type %~dp0\credits.txt
 
 echo Enter search term
 set /p searchterm=Here: 
-goto search2
+goto :search2
 
 :search2
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 animdl search %searchterm%
-goto search3
+goto :search3
 
 :search3
 Would you like to search once more?
@@ -182,10 +182,10 @@ echo  [Y.] [32mYes[0m
 echo  [N.] [31mNo[0m
 choice /C YN /N /T 10 /D Y /M Choose: 
 if %errorlevel% == 1 (
-   goto search
+   goto :search
 )
 if %errorlevel% == 2 (
-   goto finish
+   goto :finish
 )
 :download
 cls
@@ -193,7 +193,7 @@ type %~dp0\logo.txt
 type %~dp0\credits.txt
 echo What's the name of the Anime you want to download?
 set /p anime=Answer: 
-goto providerdownload
+goto :providerdownload
 
 :providerdownload
 cls
@@ -214,35 +214,35 @@ echo -------------------
 choice /C 12345678 /N /T 10 /D 1 /M Choose: 
 if %errorlevel% == 1 (
    set provider=animixplay
-   goto qualitydownload
+   goto :qualitydownload
 )
 if %errorlevel% == 2 (
    set provider=9anime
-   goto qualitydownload
+   goto :qualitydownload
 )
 if %errorlevel% == 3 (
    set provider=allanime
-   goto qualitydownload
+   goto :qualitydownload
 )
 if %errorlevel% == 4 (
    set provider=crunchyroll
-   goto qualitydownload
+   goto :qualitydownload
 )
 if %errorlevel% == 5 (
    set provider=gogoanime
-   goto qualitydownload
+   goto :qualitydownload
 )
 if %errorlevel% == 6 (
    set provider=haho
-   goto qualitydownload
+   goto :qualitydownload
 )
 if %errorlevel% == 7 (
    set provider=tenshi
-   goto qualitydownload
+   goto :qualitydownload
 )
 if %errorlevel% == 8 (
    set provider=zoro
-   goto qualitydownload
+   goto :qualitydownload
 )
 
 :qualitydownload
@@ -259,19 +259,19 @@ echo  [4.] [31m360p[0m
 choice /C 1234 /N /T 10 /D 1 /M Choose: 
 if %errorlevel% == 1 (
    set quality=1080/best
-   goto downloadselection
+   goto :downloadselection
 )
 if %errorlevel% == 2 (
    set quality=720/480
-   goto downloadselection
+   goto :downloadselection
 )
 if %errorlevel% == 3 (
    set quality=480/360
-   goto downloadselection
+   goto :downloadselection
 )
 if %errorlevel% == 4 (
    set quality=360/worst
-   goto downloadselection
+   goto :downloadselection
 )
 
 :downloadselection
@@ -283,15 +283,15 @@ echo  [Y.] [32mYes[0m
 echo  [N.] [31mNo[0m
 choice /C YN /N /M Choose:
 if %errorlevel% == 1 (
-   goto downloadselection2
+   goto :downloadselection2
 )
 if %errorlevel% == 2 (
-   goto downloadend
+   goto :downloadend
 )
 
 :downloadend
 animdl download "%provider%:%anime%" -q %quality%
-goto finish
+goto :finish
 
 :downloadselection2
 cls 
@@ -303,13 +303,13 @@ echo  [2.] [32mRange[0m
 echo  [3.] [32mBoth[0m
 choice /C 12 /N /T 10 /D 2 /M Choose:
 if %errorlevel% == 1 (
-   goto downloadspecialselection
+   goto :downloadspecialselection
 )
 if %errorlevel% == 2 (
-   goto downloadrangeselection
+   goto :downloadrangeselection
 )
 if %errorlevel% == 3 (
-   goto downloadbothselection
+   goto :downloadbothselection
 )
 
 :downloadspecialselection
@@ -319,7 +319,7 @@ type %~dp0\credits.txt
 echo Input special parameter.
 echo [latest or latest-number. Example: latest-2]
 set /p special=Answer: 
-goto downloadspecial
+goto :downloadspecial
 
 :downloadrangeselection
 cls
@@ -328,7 +328,7 @@ type %~dp0\credits.txt
 echo Input episode range.
 echo [number-number or just number. Example: 10-11 or 11]
 set /p range=Answer: 
-goto downloadrange
+goto :downloadrange
 
 :downloadbothselection
 cls
@@ -343,7 +343,7 @@ type %~dp0\credits.txt
 echo Input special parameter.
 echo [latest or latest-number. Example: latest-2]
 set /p special=Answer: 
-goto downloadboth
+goto :downloadboth
 
 
 :downloadspecial
@@ -351,21 +351,21 @@ cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 animdl download "%provider%:%anime%" -q %quality% -s %special%
-goto finish
+goto :finish
 
 :downloadrange
 cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 animdl download "%provider%:%anime%" -q %quality% -r %range%
-goto finish
+goto :finish
 
 :downloadboth
 cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 animdl download "%provider%:%anime%" -q %quality% -r %range% -s %special%
-goto finish
+goto :finish
 
 :stream
 cls
@@ -373,7 +373,7 @@ type %~dp0\logo.txt
 type %~dp0\credits.txt
 echo What's the name of the Anime you want to stream?
 set /p anime=Answer: 
-goto providerstream
+goto :providerstream
 
 :providerstream
 cls
@@ -394,35 +394,35 @@ echo -------------------
 choice /C 12345678 /N /T 10 /D 1 /M Choose: 
 if %errorlevel% == 1 (
    set provider=animixplay
-   goto qualitystream
+   goto :qualitystream
 )
 if %errorlevel% == 2 (
    set provider=9anime
-   goto qualitystream
+   goto :qualitystream
 )
 if %errorlevel% == 3 (
    set provider=allanime
-   goto qualitystream
+   goto :qualitystream
 )
 if %errorlevel% == 4 (
    set provider=crunchyroll
-   goto qualitystream
+   goto :qualitystream
 )
 if %errorlevel% == 5 (
    set provider=gogoanime
-   goto qualitystream
+   goto :qualitystream
 )
 if %errorlevel% == 6 (
    set provider=haho
-   goto qualitystream
+   goto :qualitystream
 )
 if %errorlevel% == 7 (
    set provider=tenshi
-   goto qualitystream
+   goto :qualitystream
 )
 if %errorlevel% == 8 (
    set provider=zoro
-   goto qualitystream
+   goto :qualitystream
 )
 
 :qualitystream
@@ -439,19 +439,19 @@ echo  [4.] [31m360p[0m
 choice /C 1234 /N /T 10 /D 1 /M Choose: 
 if %errorlevel% == 1 (
    set quality=1080/best
-   goto streamselection
+   goto :streamselection
 )
 if %errorlevel% == 2 (
    set quality=720/480
-   goto streamselection
+   goto :streamselection
 )
 if %errorlevel% == 3 (
    set quality=480/360
-   goto streamselection
+   goto :streamselection
 )
 if %errorlevel% == 4 (
    set quality=360/worst
-   goto streamselection
+   goto :streamselection
 )
 
 :streamselection
@@ -463,15 +463,15 @@ echo  [Y.] [32mYes[0m
 echo  [N.] [31mNo[0m
 choice /C YN /N /M Choose:
 if %errorlevel% == 1 (
-   goto streamselection2
+   goto :streamselection2
 )
 if %errorlevel% == 2 (
-   goto streamend
+   goto :streamend
 )
 
 :streamend
 animdl stream "%provider%:%anime%" -q %quality%
-goto finish
+goto :finish
 
 :streamselection2
 cls 
@@ -483,13 +483,13 @@ echo  [2.] [32mRange[0m
 echo  [3.] [32mBoth[0m
 choice /C 12 /N /T 10 /D 2 /M Choose:
 if %errorlevel% == 1 (
-   goto streamspecialselection
+   goto :streamspecialselection
 )
 if %errorlevel% == 2 (
-   goto streamrangeselection
+   goto :streamrangeselection
 )
 if %errorlevel% == 3 (
-   goto streambothselection
+   goto :streambothselection
 )
 
 :streamspecialselection
@@ -499,7 +499,7 @@ type %~dp0\credits.txt
 echo Input special parameter.
 echo [latest or latest-number. Example: latest-2]
 set /p special=Answer: 
-goto streamspecial
+goto :streamspecial
 
 :streamrangeselection
 cls
@@ -508,7 +508,7 @@ type %~dp0\credits.txt
 echo Input episode range.
 echo [number-number or just number. Example: 10-11 or 11]
 set /p range=Answer: 
-goto streamrange
+goto :streamrange
 
 :streambothselection
 cls
@@ -523,7 +523,7 @@ type %~dp0\credits.txt
 echo Input special parameter.
 echo [latest or latest-number. Example: latest-2]
 set /p special=Answer: 
-goto streamboth
+goto :streamboth
 
 
 :streamspecial
@@ -531,21 +531,21 @@ cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 animdl stream "%provider%:%anime%" -q %quality% -s %special%
-goto finish
+goto :finish
 
 :streamrange
 cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 animdl stream "%provider%:%anime%" -q %quality% -r %range%
-goto finish
+goto :finish
 
 :streamboth
 cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 animdl stream "%provider%:%anime%" -q %quality% -r %range% -s %special%
-goto finish
+goto :finish
 
 :finish
 cls
@@ -556,7 +556,7 @@ echo  [Y.] [32mYes[0m
 echo  [N.] [31mNo[0m
 choice /C YN /N /M Choose:
 if %errorlevel% == 1 (
-   goto license
+   goto :license
 )
 if %errorlevel% == 2 (
    exit
@@ -574,13 +574,13 @@ echo #     [3.] [32mReturn[0m           #
 echo -----------------------------
 choice /C 12 /N /M Choose:
 if %errorlevel% == 1 (
-   goto update
+   goto :update
 )
 if %errorlevel% == 2 (
-   goto uninstall
+   goto :uninstall
 )
 if %errorlevel% == 3 (
-   goto license
+   goto :license
 )
 
 :uninstall
@@ -589,7 +589,7 @@ type %~dp0\logo.txt
 type %~dp0\credits.txt
 echo Retrieving uninstall file.
 powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script-install-files/master/uninstall.bat' -outfile .\uninstall.bat"
-goto uninstall2
+goto :uninstall2
 
 :uninstall2
 cls
@@ -605,7 +605,7 @@ type %~dp0\logo.txt
 type %~dp0\credits.txt
 echo Retrieving file.
 powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script-install-files/master/update.bat' -outfile .\update.bat"
-goto update2
+goto :update2
 
 :update2
 cls
