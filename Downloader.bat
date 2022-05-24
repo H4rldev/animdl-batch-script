@@ -128,21 +128,27 @@ echo --------------------------------------------
 choice /C 123456 /N /M Choose: 
 if %errorlevel% == 1 (
    goto :download
+   goto download
 )
 if %errorlevel% == 2 (
    goto :stream
+   goto stream
 )
 if %errorlevel% == 3 (
    goto :schedule
+   goto stream
 )
 if %errorlevel% == 4 (
    goto :search
+   goto search
 )
 if %errorlevel% == 5 (
    goto :test
+   goto test
 )
 if %errorlevel% == 6 (
    goto :options
+   goto options
 )
 
 :test
@@ -183,9 +189,11 @@ echo  [N.] [31mNo[0m
 choice /C YN /N /T 10 /D Y /M Choose: 
 if %errorlevel% == 1 (
    goto :search
+   goto search
 )
 if %errorlevel% == 2 (
    goto :finish
+   goto finish
 )
 :download
 cls
@@ -215,34 +223,42 @@ choice /C 12345678 /N /T 10 /D 1 /M Choose:
 if %errorlevel% == 1 (
    set provider=animixplay
    goto :qualitydownload
+   goto qualitydownload
 )
 if %errorlevel% == 2 (
    set provider=9anime
    goto :qualitydownload
+   goto qualitydownload
 )
 if %errorlevel% == 3 (
    set provider=allanime
    goto :qualitydownload
+   goto qualitydownload
 )
 if %errorlevel% == 4 (
    set provider=crunchyroll
    goto :qualitydownload
+   goto qualitydownload
 )
 if %errorlevel% == 5 (
    set provider=gogoanime
    goto :qualitydownload
+   goto qualitydownload
 )
 if %errorlevel% == 6 (
    set provider=haho
    goto :qualitydownload
+   goto qualitydownload
 )
 if %errorlevel% == 7 (
    set provider=tenshi
    goto :qualitydownload
+   goto qualitydownload
 )
 if %errorlevel% == 8 (
    set provider=zoro
    goto :qualitydownload
+   goto qualitydownload
 )
 
 :qualitydownload
@@ -260,18 +276,22 @@ choice /C 1234 /N /T 10 /D 1 /M Choose:
 if %errorlevel% == 1 (
    set quality=1080/best
    goto :downloadselection
+   goto downloadselection
 )
 if %errorlevel% == 2 (
    set quality=720/480
    goto :downloadselection
+   goto downloadselection
 )
 if %errorlevel% == 3 (
    set quality=480/360
    goto :downloadselection
+   goto downloadselection
 )
 if %errorlevel% == 4 (
    set quality=360/worst
    goto :downloadselection
+   goto downloadselection
 )
 
 :downloadselection
@@ -284,12 +304,15 @@ echo  [N.] [31mNo[0m
 choice /C YN /N /M Choose:
 if %errorlevel% == 1 (
    goto :downloadselection2
+   goto downloadselection2
 )
 if %errorlevel% == 2 (
    goto :downloadend
+   goto downloadend
 )
 
 :downloadend
+cls
 animdl download "%provider%:%anime%" -q %quality%
 goto :finish
 
@@ -304,12 +327,15 @@ echo  [3.] [32mBoth[0m
 choice /C 12 /N /T 10 /D 2 /M Choose:
 if %errorlevel% == 1 (
    goto :downloadspecialselection
+   goto downloadspecialselection
 )
 if %errorlevel% == 2 (
    goto :downloadrangeselection
+   goto downloadrangeselection
 )
 if %errorlevel% == 3 (
    goto :downloadbothselection
+   goto downloadbothselection
 )
 
 :downloadspecialselection
@@ -348,22 +374,16 @@ goto :downloadboth
 
 :downloadspecial
 cls
-type %~dp0\logo.txt
-type %~dp0\credits.txt
 animdl download "%provider%:%anime%" -q %quality% -s %special%
 goto :finish
 
 :downloadrange
 cls
-type %~dp0\logo.txt
-type %~dp0\credits.txt
 animdl download "%provider%:%anime%" -q %quality% -r %range%
 goto :finish
 
 :downloadboth
 cls
-type %~dp0\logo.txt
-type %~dp0\credits.txt
 animdl download "%provider%:%anime%" -q %quality% -r %range% -s %special%
 goto :finish
 
@@ -395,34 +415,42 @@ choice /C 12345678 /N /T 10 /D 1 /M Choose:
 if %errorlevel% == 1 (
    set provider=animixplay
    goto :qualitystream
+   goto qualitystream
 )
 if %errorlevel% == 2 (
    set provider=9anime
    goto :qualitystream
+   goto qualitystream
 )
 if %errorlevel% == 3 (
    set provider=allanime
    goto :qualitystream
+   goto qualitystream
 )
 if %errorlevel% == 4 (
    set provider=crunchyroll
    goto :qualitystream
+   goto qualitystream
 )
 if %errorlevel% == 5 (
    set provider=gogoanime
    goto :qualitystream
+   goto qualitystream
 )
 if %errorlevel% == 6 (
    set provider=haho
    goto :qualitystream
+   goto qualitystream
 )
 if %errorlevel% == 7 (
    set provider=tenshi
    goto :qualitystream
+   goto qualitystream
 )
 if %errorlevel% == 8 (
    set provider=zoro
    goto :qualitystream
+   goto qualitystream
 )
 
 :qualitystream
@@ -440,18 +468,22 @@ choice /C 1234 /N /T 10 /D 1 /M Choose:
 if %errorlevel% == 1 (
    set quality=1080/best
    goto :streamselection
+   goto streamselection
 )
 if %errorlevel% == 2 (
    set quality=720/480
    goto :streamselection
+   goto streamselection
 )
 if %errorlevel% == 3 (
    set quality=480/360
    goto :streamselection
+   goto streamselection
 )
 if %errorlevel% == 4 (
    set quality=360/worst
    goto :streamselection
+   goto streamselection
 )
 
 :streamselection
@@ -464,12 +496,15 @@ echo  [N.] [31mNo[0m
 choice /C YN /N /M Choose:
 if %errorlevel% == 1 (
    goto :streamselection2
+   goto streamselection2
 )
 if %errorlevel% == 2 (
    goto :streamend
+   goto streamend
 )
 
 :streamend
+cls
 animdl stream "%provider%:%anime%" -q %quality%
 goto :finish
 
@@ -484,12 +519,16 @@ echo [3.] [32mBoth[0m
 choice /C 12 /N /T 10 /D 2 /M Choose:
 if %errorlevel% == 1 (
    goto :streamspecialselection
+   goto streamspecialselection
+
 )
 if %errorlevel% == 2 (
    goto :streamrangeselection
+   goto streamrangeselection
 )
 if %errorlevel% == 3 (
    goto :streambothselection
+   goto streambothselection
 )
 
 :streamspecialselection
@@ -528,22 +567,16 @@ goto :streamboth
 
 :streamspecial
 cls
-type %~dp0\logo.txt
-type %~dp0\credits.txt
 animdl stream "%provider%:%anime%" -q %quality% -s %special%
 goto :finish
 
 :streamrange
 cls
-type %~dp0\logo.txt
-type %~dp0\credits.txt
 animdl stream "%provider%:%anime%" -q %quality% -r %range%
 goto :finish
 
 :streamboth
 cls
-type %~dp0\logo.txt
-type %~dp0\credits.txt
 animdl stream "%provider%:%anime%" -q %quality% -r %range% -s %special%
 goto :finish
 
@@ -557,6 +590,7 @@ echo [N.] [31mNo[0m
 choice /C YN /N /M Choose:
 if %errorlevel% == 1 (
    goto :license
+   goto license
 )
 if %errorlevel% == 2 (
    exit
@@ -576,15 +610,19 @@ echo -------------------------------
 choice /C 1234 /N /M Choose:
 if %errorlevel% == 1 (
    goto :update
+   goto update
 )
 if %errorlevel% == 2 (
    goto :uninstall
+   goto uninstall
 )
 if %errorlevel% == 3 (
    goto :discordrpc
+   goto discordrpc
 )
 if %errorlevel% == 4 (
    goto :license
+   goto license
 )
 
 :uninstall
@@ -629,9 +667,11 @@ if exist %USERPROFILE%\.animdl\config.yml (
    if %errorlevel% == 1(
       RD /Q /S "%USERPROFILE%\.animdl"
       goto :options
+      goto options
    )
    if %errorlevel% == 2(
       goto :options
+      goto options
    )
 
 ) else (
@@ -643,8 +683,10 @@ if exist %USERPROFILE%\.animdl\config.yml (
    if %errorlevel% == 1 (
       echo discord_presence: true > %USERPROFILE%\.animdl\config.yml
       goto :options
+      goto options
    )
    if %errorlevel% == 2 (
       goto :options
+      goto options
    )
 )
