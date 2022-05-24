@@ -1,6 +1,51 @@
 @echo off
 
 :init
+if exist "%~dp0\install\" (
+   goto removeinstallfiles
+) else (
+   if exist "%~dp0\install.bat" (
+      goto removeinstallfiles
+   ) else (
+      goto init2
+   )
+)
+
+
+:removeinstallfiles
+cls
+type %~dp0\logo.txt
+type %~dp0\credits.txt
+echo Would you like to remove your remainging install files?
+echo  [Y.] [32mYes[0m
+echo  [N.] [31mNo[0m
+choice /C YN /N /M Choose: 
+if %errorlevel% == 1 (
+   goto removeinstallfiles2
+)
+if %errorlevel% == 2 (
+   goto init2
+)
+
+:removeinstallfiles2
+if exist "%~dp0\install.bat" (
+   del /F /Q install.bat
+   if exist "%~dp0\install\" (
+      RD /S /Q "%~dp0\install"
+   ) else (
+      goto init2
+   )
+) else (
+   if exist "%~dp0\install" (
+      RD /S /Q "%~dp0\install"
+      goto init2
+   ) else (
+      goto init2
+   )
+)
+
+:init2
+cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 pause
