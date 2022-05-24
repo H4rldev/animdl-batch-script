@@ -478,9 +478,9 @@ cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 echo Would you like to specify a special prompt like latest episode or just do a range?
-echo  [1.] [32mSpecial[0m 
-echo  [2.] [32mRange[0m
-echo  [3.] [32mBoth[0m
+echo [1.] [32mSpecial[0m 
+echo [2.] [32mRange[0m
+echo [3.] [32mBoth[0m
 choice /C 12 /N /T 10 /D 2 /M Choose:
 if %errorlevel% == 1 (
    goto :streamspecialselection
@@ -552,8 +552,8 @@ cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 echo Want to return to the start?
-echo  [Y.] [32mYes[0m
-echo  [N.] [31mNo[0m
+echo [Y.] [32mYes[0m
+echo [N.] [31mNo[0m
 choice /C YN /N /M Choose:
 if %errorlevel% == 1 (
    goto :license
@@ -566,13 +566,14 @@ if %errorlevel% == 2 (
 cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
-echo -----------------------------
-echo #          Options          #
-echo #     [1.] [32mUpdate[0m           #
-echo #     [2.] [31mUninstall[0m        #
-echo #     [3.] [32mReturn[0m           #
-echo -----------------------------
-choice /C 12 /N /M Choose:
+echo -------------------------------
+echo #          Options            #
+echo #     [1.] [32mUpdate[0m             #
+echo #     [2.] [31mUninstall[0m          #
+echo #     [3.] [31mDiscord RPC[0m        #
+echo #     [4.] [32mReturn[0m             #
+echo -------------------------------
+choice /C 1234 /N /M Choose:
 if %errorlevel% == 1 (
    goto :update
 )
@@ -580,6 +581,9 @@ if %errorlevel% == 2 (
    goto :uninstall
 )
 if %errorlevel% == 3 (
+   goto :discordrpc
+)
+if %errorlevel% == 4 (
    goto :license
 )
 
@@ -614,3 +618,33 @@ type %~dp0\credits.txt
 echo Update file should be retrieved, open it to update.
 pause
 exit
+
+:discordrpc
+if exist %USERPROFILE%\.animdl\config.yml (
+   echo DISCORD-RPC is probably [[32mENABLED[0m]
+   echo Would you like to disable it?
+   echo [Y.] [32mYes[0m
+   echo [N.] [31mNo[0m
+   choice /C YN /N /M Choose: 
+   if %errorlevel% == 1(
+      RD /Q /S "%USERPROFILE%\.animdl"
+      goto :options
+   )
+   if %errorlevel% == 2(
+      goto :options
+   )
+
+) else (
+   echo DISCORD-RPC is [[32mDISABLED[0m]
+   echo Would you like to enable it?
+   echo [Y.] [32mYes[0m
+   echo [N.] [31mNo[0m
+   choice /C YN /N /M Choose: 
+   if %errorlevel% == 1 (
+      echo discord_presence: true > %USERPROFILE%\.animdl\config.yml
+      goto :options
+   )
+   if %errorlevel% == 2 (
+      goto :options
+   )
+)
