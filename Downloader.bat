@@ -47,12 +47,10 @@ echo # [4.] [36mSearch[0m                              #
 echo # [Search for anime without downloading.]  #
 echo # [5.] [36mTest[0m                                #
 echo # [Test providers to see what works best.] #
-echo # [6.] [35mUpdate[0m                              #
-echo # [Update the tool and batch file]         #
-echo # [7.] [35mOptions[0m                             #
-echo # [Change settings.]                       #
+echo # [6.] [35mOther Options[0m                       #
+echo # [Show other options.]                    #
 echo --------------------------------------------
-choice /C 1234567 /N /M Choose: 
+choice /C 123456 /N /M Choose: 
 if %errorlevel% == 1 (
    goto download
 )
@@ -69,9 +67,6 @@ if %errorlevel% == 5 (
    goto test
 )
 if %errorlevel% == 6 (
-   goto update
-)
-if %errorlevel% == 7 (
    goto options
 )
 
@@ -498,14 +493,18 @@ type %~dp0\logo.txt
 type %~dp0\credits.txt
 echo -----------------------------
 echo #          Options          #
-echo #     [1.] [31mUninstall[0m        #
-echo #     [2.] [32mReturn[0m           #
+echo #     [1.] [32mUpdate[0m           #
+echo #     [2.] [31mUninstall[0m        #
+echo #     [3.] [32mReturn[0m           #
 echo -----------------------------
 choice /C 12 /N /M Choose:
 if %errorlevel% == 1 (
-   goto uninstall
+   goto update
 )
 if %errorlevel% == 2 (
+   goto uninstall
+)
+if %errorlevel% == 3 (
    goto license
 )
 
