@@ -2,8 +2,5 @@
 
 ## Install
 1. goto https://github.com/H4rldev/animdl-batch-script-install-files
-2. clone it <br>
-how to clone: <br>
-open terminal <br>
-type git clone [url]
+2. clone it
 3. run install.bat
