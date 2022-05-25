@@ -183,7 +183,7 @@ animdl search %searchterm%
 goto :search3
 
 :search3
-Would you like to search once more?
+echo Would you like to search once more?
 echo  [Y.] [32mYes[0m
 echo  [N.] [31mNo[0m
 choice /C YN /N /T 10 /D Y /M Choose: 
@@ -711,3 +711,6 @@ notepad.exe %USERPROFILE%\.animdl\config.yml
 pause
 goto :options
 goto options
+
+:fzf
+
