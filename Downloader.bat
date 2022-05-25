@@ -602,15 +602,15 @@ type %~dp0\logo.txt
 type %~dp0\credits.txt
 echo -------------------------------
 echo #          Options            #
-echo #     [1.] [32mDiscord RPC[0m        #
-echo #     [2.] [32mUpdate[0m             #
-echo #     [3.] [31mUninstall[0m          #
-echo #     [4.] [32mReturn[0m             #
+echo # [1.] [32mOpen config file[0m   #
+echo # [2.] [32mUpdate[0m             #
+echo # [3.] [31mUninstall[0m          #
+echo # [4.] [32mReturn[0m             #
 echo -------------------------------
 choice /C 1234 /N /M Choose:
 if %errorlevel% == 1 (
-   goto :discordrpc
-   goto discordrpc
+   goto :configure
+   goto configure
 )
 if %errorlevel% == 2 (
    goto :update
@@ -690,3 +690,24 @@ if exist %USERPROFILE%\.animdl\config.yml (
       goto options
    )
 )
+
+:configure
+cls
+type %~dp0\logo.txt
+type %~dp0\credits.txt
+if exist "%USERPROFILE%\.animdl\config.yml" (
+   goto configure2
+   goto :configure2
+) else (
+   echo You don't have a config file.
+   echo Retrieving a default one.
+   powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script-install-files/master/config.yml' -outfile %USERPROFILE%\.animdl\config.yml"
+   goto :configure2
+   goto configure2
+)
+
+:configure2
+notepad.exe %USERPROFILE%\.animdl\config.yml
+pause
+goto :options
+goto options
