@@ -657,40 +657,6 @@ echo Update file should be retrieved, open it to update.
 pause
 exit
 
-:discordrpc
-if exist %USERPROFILE%\.animdl\config.yml (
-   echo DISCORD-RPC is probably [[32mENABLED[0m]
-   echo Would you like to disable it?
-   echo [Y.] [32mYes[0m
-   echo [N.] [31mNo[0m
-   choice /C YN /N /M Choose: 
-   if %errorlevel% == 1(
-      RD /Q /S "%USERPROFILE%\.animdl"
-      goto :options
-      goto options
-   )
-   if %errorlevel% == 2(
-      goto :options
-      goto options
-   )
-
-) else (
-   echo DISCORD-RPC is [[32mDISABLED[0m]
-   echo Would you like to enable it?
-   echo [Y.] [32mYes[0m
-   echo [N.] [31mNo[0m
-   choice /C YN /N /M Choose: 
-   if %errorlevel% == 1 (
-      echo discord_presence: true > %USERPROFILE%\.animdl\config.yml
-      goto :options
-      goto options
-   )
-   if %errorlevel% == 2 (
-      goto :options
-      goto options
-   )
-)
-
 :configure
 cls
 type %~dp0\logo.txt
@@ -701,6 +667,7 @@ if exist "%USERPROFILE%\.animdl\config.yml" (
 ) else (
    echo You don't have a config file.
    echo Retrieving a default one.
+   mkdir "%USERPROFILE%\.animdl"
    powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script-install-files/master/config.yml' -outfile %USERPROFILE%\.animdl\config.yml"
    goto :configure2
    goto configure2
