@@ -602,23 +602,23 @@ type %~dp0\logo.txt
 type %~dp0\credits.txt
 echo -------------------------------
 echo #          Options            #
-echo #     [1.] [32mUpdate[0m             #
-echo #     [2.] [31mUninstall[0m          #
-echo #     [3.] [31mDiscord RPC[0m        #
+echo #     [1.] [32mDiscord RPC[0m        #
+echo #     [2.] [32mUpdate[0m             #
+echo #     [3.] [31mUninstall[0m          #
 echo #     [4.] [32mReturn[0m             #
 echo -------------------------------
 choice /C 1234 /N /M Choose:
 if %errorlevel% == 1 (
+   goto :discordrpc
+   goto discordrpc
+)
+if %errorlevel% == 2 (
    goto :update
    goto update
 )
-if %errorlevel% == 2 (
+if %errorlevel% == 3 (
    goto :uninstall
    goto uninstall
-)
-if %errorlevel% == 3 (
-   goto :discordrpc
-   goto discordrpc
 )
 if %errorlevel% == 4 (
    goto :license
