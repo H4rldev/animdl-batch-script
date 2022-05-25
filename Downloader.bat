@@ -46,9 +46,9 @@ if exist "%~dp0\install\" (
 cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
-echo Would you like to remove your remainging install files?
-echo  [Y.] [32mYes[0m
-echo  [N.] [31mNo[0m
+echo Would you like to remove your remaining install files?
+echo [Y.] [32mYes[0m
+echo [N.] [31mNo[0m
 choice /C YN /N /M Choose: 
 if %errorlevel% == 1 (
    goto :removeinstallfiles2
