@@ -120,9 +120,7 @@ echo # [3.] [36mSchedule[0m                            #
 echo # [Look at upcoming releases.]             #
 echo # [4.] [36mSearch[0m                              #
 echo # [Search for anime without downloading.]  #
-echo # [5.] [36mTest[0m                                #
-echo # [Test providers to see what works best.] #
-echo # [6.] [35mOther Options[0m                       #
+echo # [5.] [35mOther Options[0m                       #
 echo # [Show other options.]                    #
 echo --------------------------------------------
 choice /C 123456 /N /M Choose: 
@@ -143,21 +141,9 @@ if %errorlevel% == 4 (
    goto search
 )
 if %errorlevel% == 5 (
-   goto :test
-   goto test
-)
-if %errorlevel% == 6 (
    goto :options
    goto options
 )
-
-:test
-cls
-type %~dp0\logo.txt
-type %~dp0\credits.txt
-animdl test
-pause
-goto :license
 
 :schedule
 cls
