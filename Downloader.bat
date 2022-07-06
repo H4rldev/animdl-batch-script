@@ -616,7 +616,7 @@ cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 echo Retrieving uninstall file.
-powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script-install-files/master/uninstall.bat' -outfile .\uninstall.bat"
+powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-script-install/master/uninstall.bat' -outfile .\uninstall.bat"
 goto :uninstall2
 
 :uninstall2
@@ -632,7 +632,7 @@ cls
 type %~dp0\logo.txt
 type %~dp0\credits.txt
 echo Retrieving file.
-powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script-install-files/master/update.bat' -outfile .\update.bat"
+powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-script-install/master/update.bat' -outfile .\update.bat"
 goto :update2
 
 :update2
@@ -654,7 +654,7 @@ if exist "%USERPROFILE%\.animdl\config.yml" (
    echo You don't have a config file.
    echo Retrieving a default one.
    mkdir "%USERPROFILE%\.animdl"
-   powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-batch-script-install-files/master/config.yml' -outfile %USERPROFILE%\.animdl\config.yml"
+   powershell.exe -c "invoke-webrequest 'https://raw.githubusercontent.com/H4rldev/animdl-script-install/master/config.yml' -outfile %USERPROFILE%\.animdl\config.yml"
    goto :configure2
    goto configure2
 )
@@ -664,6 +664,3 @@ notepad.exe %USERPROFILE%\.animdl\config.yml
 pause
 goto :options
 goto options
-
-:fzf
-
